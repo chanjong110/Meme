@@ -1,3 +1,4 @@
+const fillBtn = document.getElementById("Fill-btn");
 const saveBtn = document.getElementById("saveimage");
 const textInput = document.getElementById("text");
 const fileInput = document.getElementById("file");
@@ -17,7 +18,7 @@ canvas.height = CANVAS_HEIGHT;
 ctx.linewidth = lineWidth.value;
 ctx.lineCap = "round";
 let isPainting = false;
-let isFilling = false;
+let isBgfilling = false;
 
 function onMove(event){
     if(isPainting){
@@ -27,7 +28,8 @@ function onMove(event){
     }
     ctx.moveTo(event.offsetX, event.offsetY);
 }
-
+function onFill(event){
+}
 function startPainting(){
     isPainting = true;
 }
@@ -54,16 +56,16 @@ function onColorClick(event){
 }
 
 function onModeClick(){
-    if(isFilling){
-        isFilling = false
-        modeBtn.innerText = "Fill🎨"
-    } else{isFilling = true 
+    if(isPainting){
+        isPainting = false
+        modeBtn.innerText = "Bold Draw🎨"
+    } else{isPainting = true 
         modeBtn.innerText = "Stroke🎨"};
     }
 
 
 function onCanvasClick(){
-    if(isFilling){
+    if(isBgfilling){
         ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     }
 }
@@ -77,9 +79,8 @@ function onDestroyClick(){
 }
 
 function onEraserClick(){
-    isFilling = false;
+    isPainting = false;
     ctx.strokeStyle = "white";
-    modeBtn.innerText = "Fill🎨";
 }
 
 function onFileChange(event){
@@ -112,10 +113,21 @@ function onSaveClick(){
     a.click();
 }
 
+function onFillClick(){
+    if(isBgfilling){
+        isBgfilling = false
+        fillBtn.innerText = "Draw Paint🖍️"
+    } else{
+        isBgfilling = true
+        fillBtn.innerText = "Now Filling Mode🏮"
+    };
+}
+
 canvas.addEventListener("dblclick", onDoubleClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
+canvas.addEventListener("mouseenter", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 canvas.addEventListener("click", onCanvasClick);
 lineWidth.addEventListener("change", onLineWidthChange);
@@ -126,3 +138,4 @@ destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
+fillBtn.addEventListener("click", onFillClick);

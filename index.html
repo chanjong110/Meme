@@ -35,7 +35,8 @@
     <canvas></canvas>
     <div class="btns">
         <input id="line-width", type="range" min="1", max="10"value="5">
-<button id ="mode-btn">Draw🎨</button>
+<button id ="mode-btn">DrawMode🎨</button>
+<button id="Fill-btn">Fill🏮</button>
 <button id ="destroy-btn">Reset🧨</button>
 <button id ="eraser-btn">Erase❌</button>
  <!-- accept 받아들이는 파일의 종류 제한. img/*는 포멧 상관 없이 이미지만 받아들인다는 의미이다.-->
@@ -47,6 +48,11 @@
 </label>
 <input type ="text" placeholder="Add text here!" id = "text" />
 <button id = "saveimage">Save📂</button>
+</div>
+<div class="fonts">
+    <button id="font-family">Family</button>
+    <button id="font-style">Style</button>
+    <button id="font-size">Size</button>
 </div>
     <script src="app.js"></script>
 </body>
